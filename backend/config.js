@@ -1,3 +1,6 @@
 module.exports = {
-	transports: ['websocket'],
+	socketConfig: {
+        transports: ['websocket'],
+    },
+    CHAT_DB: 'chats'
 }

@@ -2,9 +2,16 @@ var express = require('express')
 var app = express()
 var cors = require('cors')
 var http = require('http').Server(app)
-var socketConfig = require('./config')
-var io = require('socket.io')(http, socketConfig)
+var config = require('./config')
+var mongoose = require('mongoose')
+var io = require('socket.io')(http, config['socketConfig'])
 var port = process.env.PORT || 8081
+
+require('dotenv').config()
+const DB_HOST = process.env.DB_HOST
+const CHAT_DB = config['CHAT_DB']
+require('./models/Chats')
+const Chat = mongoose.model(CHAT_DB)
 
 var rooms = {}
 var roomsCreatedAt = new WeakMap()
