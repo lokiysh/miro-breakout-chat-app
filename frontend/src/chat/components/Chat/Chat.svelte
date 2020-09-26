@@ -42,7 +42,7 @@
 	onMount(() => {
 		setTimeout(() => {
 			input_ref.focus()
-		}, 100)
+		}, 0)
 		chatController = chatFactory({roomId, name, messageHandler: handleNewMessage})
 	})
 </script>
