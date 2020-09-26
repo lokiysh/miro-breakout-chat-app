@@ -16,6 +16,7 @@
 
 	let newMessageText: string = ''
 	let input_ref = null
+	let chat_body = null
 
 	let chatController: ChatController = null
 
@@ -45,6 +46,10 @@
 		}, 0)
 		chatController = chatFactory({roomId, name, messageHandler: handleNewMessage})
 	})
+
+	afterUpdate(() => {
+		chat_body.scrollTo(0, chat_body.scrollHeight);
+	})
 </script>
 
 <style>
@@ -64,8 +69,13 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-		height: calc(100% - 120px);
+		height: 100%;
 		padding: 0 24px;
+	}
+
+	.sidebar__body_container {
+		height: calc(100% - 120px);
+		overflow: auto;
 	}
 
 	.sidebar__footer {
@@ -81,10 +91,12 @@
 	<div class="sidebar__header">
 		<span class="miro-h2">Breakout Chat</span>
 	</div>
-	<div class="sidebar__body">
-		{#each messages as message}
-			<Message {message} />
-		{/each}
+	<div class="sidebar__body_container" bind:this={chat_body}>
+		<div class="sidebar__body">
+			{#each messages as message}
+				<Message {message} />
+			{/each}
+		</div>
 	</div>
 	<div class="sidebar__footer">
 		<form on:submit|preventDefault={handleMessageSend}>
