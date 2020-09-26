@@ -21,6 +21,21 @@ var name
 
 app.use(cors())
 
+const dbConnect = async() => {
+	try {
+		db = DB_HOST + '/' + CHAT_DB
+		await mongoose.connect(db, {
+			useCreateIndex: true,
+			useNewUrlParser: true,
+			useFindAndModify: false,
+			useUnifiedTopology: true
+		})
+		return 1
+	} catch (err) {
+		console.error(err.message)
+	}
+}
+
 app.get('/rooms/:roomId', (req, res) => {
 	const {roomId} = req.params
 	const room = rooms[roomId]
