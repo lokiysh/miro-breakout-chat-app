@@ -15,6 +15,7 @@
 	export let name: string
 
 	let newMessageText: string = ''
+	let input_ref = null
 
 	let chatController: ChatController = null
 
@@ -39,6 +40,9 @@
 	}
 
 	onMount(() => {
+		setTimeout(() => {
+			input_ref.focus()
+		}, 100)
 		chatController = chatFactory({roomId, name, messageHandler: handleNewMessage})
 	})
 </script>
@@ -89,7 +93,9 @@
 				type="text"
 				class="miro-input miro-input--primary"
 				bind:value={newMessageText}
-				placeholder="Type your message here" />
+				placeholder="Type your message here"
+				bind:this={input_ref}
+			/>
 		</form>
 	</div>
 </div>
