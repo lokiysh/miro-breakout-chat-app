@@ -1,8 +1,13 @@
 const mongoose = require('mongoose')
-var config = require('../config')
+const encrypt = require('mongoose-encryption')
+const config = require('../config')
 
 const Schema = mongoose.Schema
 const CHAT_DB = config['CHAT_DB']
+
+var signing_key = process.env.SIGNING_KEY
+var encrypt_key = process.env.ENCRYPTION_KEY
+
 const ChatSchema = new Schema({
     author: {
         type: String,
@@ -23,4 +28,5 @@ const ChatSchema = new Schema({
     versionKey: false 
 })
 ChatSchema.index({roomId : 1})
+ChatSchema.plugin(encrypt, { encryptionKey: encrypt_key, signingKey: signing_key, excludeFromEncryption: ['roomId'] })
 module.exports = Chat = mongoose.model(CHAT_DB, ChatSchema)
