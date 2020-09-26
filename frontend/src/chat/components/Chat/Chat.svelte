@@ -69,8 +69,8 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-		height: 100%;
 		padding: 0 24px;
+		min-height: 100%;
 	}
 
 	.sidebar__body_container {
