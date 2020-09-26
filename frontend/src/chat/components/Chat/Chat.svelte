@@ -19,14 +19,19 @@
 	let chatController: ChatController = null
 
 	let messages: Array<MessageInterface> = []
-	const handleNewMessage: MessageHandler = (text, author) => {
-		messages = [...messages, {text, author, timestamp: new Date()}]
+	const handleNewMessage: MessageHandler = (msg : MessageInterface) => {
+		messages = [...messages, msg]
 	}
 
 	const handleMessageSend = () => {
 		if (!newMessageText) return
-
-		chatController.sendMessage(newMessageText)
+		let message : MessageInterface = {
+			text : newMessageText,
+			author: name,
+			roomId: roomId,
+			timestamp: new Date()
+		}
+		chatController.sendMessage(message)
 
 		newMessageText = ''
 

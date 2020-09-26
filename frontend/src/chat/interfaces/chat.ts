@@ -2,9 +2,10 @@ export interface Message {
 	text: string
 	author: string
 	timestamp: Date
+    roomId: string
 }
 
-export type MessageHandler = (msg: string, name: string) => void
+export type MessageHandler = (msg: Message) => void
 
 export type EmitHandler = (error: any, response: any) => void
 
@@ -15,5 +16,5 @@ export interface ChatSettings {
 }
 
 export interface ChatController {
-	sendMessage: (msg: string) => void
+	sendMessage: (msg: Message) => void
 }

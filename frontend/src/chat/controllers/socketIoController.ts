@@ -2,7 +2,7 @@ import io from 'socket.io-client'
 
 import {CHAT_HOST, CHAT_OPTIONS} from '../../config'
 
-import type {ChatSettings, ChatController} from '../interfaces/chat'
+import type {ChatSettings, ChatController, Message} from '../interfaces/chat'
 
 const initChat = ({roomId, name, messageHandler}: ChatSettings) => {
 	const socket = io(CHAT_HOST, CHAT_OPTIONS)
@@ -12,7 +12,7 @@ const initChat = ({roomId, name, messageHandler}: ChatSettings) => {
 	socket.on('chat message', messageHandler)
 
 	return {
-		sendMessage: (msg: string) => {
+		sendMessage: (msg: Message) => {
 			socket.emit('chat message', msg, () => {})
 		},
 	} as ChatController

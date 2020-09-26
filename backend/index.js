@@ -55,7 +55,7 @@ app.get('/rooms', (req, res) => {
 })
 
 io.on('connection', (socket) => {
-	socket.on('join', (_roomId, _name, callback) => {
+	socket.on('join', async (_roomId, _name, callback) => {
 		if (!_roomId || !_name) {
 			if (callback) {
 				callback('roomId and name params required')
