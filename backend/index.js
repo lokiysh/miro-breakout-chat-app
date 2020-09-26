@@ -81,6 +81,10 @@ io.on('connection', (socket) => {
 		names.set(socket, name)
 
 		io.to(roomId).emit('system message', `${name} joined ${roomId}`)
+		let chats = await Chat.find({"roomId" : roomId}).sort({timestamp : 1})
+		for (let i = 0; i < chats.length; i++) {
+			io.to(roomId).emit('chat message', chats[i])
+		}
 
 		if (callback) {
 			callback(null, {success: true})
