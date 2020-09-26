@@ -87,8 +87,17 @@ io.on('connection', (socket) => {
 		}
 	})
 
-	socket.on('chat message', (msg) => {
-		io.to(roomId).emit('chat message', msg, name)
+	socket.on('chat message', async (msg) => {
+		try {
+			await new Chat({
+				author: msg.author,
+				text: msg.text,
+				roomId: msg.roomId
+			}).save()
+			io.to(msg.roomId).emit('chat message', msg)
+		} catch (err) {
+			console.error(err)
+		}
 	})
 
 	socket.on('disconnect', () => {
