@@ -96,7 +96,7 @@ io.on('connection', (socket) => {
 			await new Chat({
 				author: msg.author,
 				text: msg.text,
-				roomId: msg.roomId
+				roomId: escape(msg.roomId.toString().trim())
 			}).save()
 			io.to(msg.roomId).emit('chat message', msg)
 		} catch (err) {
