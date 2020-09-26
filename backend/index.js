@@ -63,6 +63,9 @@ io.on('connection', (socket) => {
 			console.warn(`${socket.id} attempting to connect without roomId or name`, {roomId, name})
 			return
 		}
+		if (!dbConnect()) {
+			return
+		}
 
 		roomId = _roomId
 		name = _name
