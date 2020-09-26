@@ -15,8 +15,8 @@ Add multiple local chats to you Miro board. Uses WebSockets and Miro Web SDK.
 - If you have Docker, just launch `first-run.sh` - it will run `npm install` in both `backend` and `frontend` folders and then run `docker-compose up -d` (application folders including node_modules are mounted to containers to provide live reloading). Next time, you can just run `docker-compose up -d` in your root folder. Use `docker-compose down` to stop containers.
 
 - If you don't have Docker, run `npm install && npm run dev` in 2 parallel instances of the terminal from both backend and frontend folders.
-
-3. If everything goes well, you should see a webpage at http://localhost (also an empty array should be returned if you GET http://localhost:8081/rooms - this is an endpoint to get current chat rooms).
+3. Install [MongoDb](https://docs.mongodb.com/manual/installation/) and start the process `brew services start mongodb-community@4.4`
+4. If everything goes well, you should see a webpage at http://localhost (also an empty array should be returned if you GET http://localhost:8081/rooms - this is an endpoint to get current chat rooms).
 
 ## Connecting to Miro
 
